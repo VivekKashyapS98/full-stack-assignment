@@ -3,6 +3,8 @@ const { uri } = require("../keys/key");
 mongoose.set("debug", true);
 mongoose.Promise = Promise;
 
+console.log(uri);
+
 mongoose
   .connect(uri, {
     keepAlive: true,

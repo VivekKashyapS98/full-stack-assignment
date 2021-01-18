@@ -34,23 +34,20 @@ const userSchema = new schema({
       },
       completedAt: {
         type: Date,
+        default: null,
       },
-      duration: {
-        type: String,
-      },
-      timeRemaining: {
-        type: String,
-      },
-      notes: {
-        text: {
-          type: String,
-          required: true,
+      notes: [
+        {
+          text: {
+            type: String,
+            required: true,
+          },
+          createdAt: {
+            type: Date,
+            required: true,
+          },
         },
-        createdAt: {
-          type: Date,
-          required: true,
-        },
-      },
+      ],
     },
   ],
 });
