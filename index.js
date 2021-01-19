@@ -16,7 +16,7 @@ app.use(cors());
 app.use(bodyparser.json());
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/api/auth", loginRequired, ensureCorrectUser, userAuth);
+app.use("/api/auth", userAuth);
 app.use("/api/tasks/:id", loginRequired, ensureCorrectUser, tasks);
 
 app.use((req, res, next) => {
