@@ -5,6 +5,7 @@ const {
   addTask,
   removeTask,
   setComplete,
+  addNotes,
 } = require("../handlers/task");
 const router = express.Router();
 
@@ -12,7 +13,8 @@ router
   .route("/:id")
   .get(loginRequired, ensureCorrectUser, getTasks)
   .post(loginRequired, ensureCorrectUser, addTask);
-router.delete("/:id2", removeTask);
-router.post("/complete/:id2", setComplete);
+router.delete("/id/:id2", loginRequired, ensureCorrectUser, removeTask);
+router.post("/id/complete/:id2", loginRequired, ensureCorrectUser, setComplete);
+router.post("/id/notes/id2", loginRequired, ensureCorrectUser, addNotes);
 
 module.exports = router;
