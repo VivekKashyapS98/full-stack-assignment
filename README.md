@@ -1,3 +1,11 @@
+# Instructions to run
+
+## npm run server
+## npm start
+This command can run the server..
+
+
+
 # Full Stack Developer Assignment
 
 ## Instructions for submitting the assignment
