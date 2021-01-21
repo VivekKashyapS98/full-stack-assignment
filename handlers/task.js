@@ -35,12 +35,7 @@ exports.removeTask = async function (req, res, next) {
 exports.setComplete = async function (req, res, next) {
   try {
     let user = await db.User.findById(req.params.id);
-    let newTaskArray = user.tasks.map((task) => {
-      if (task.id === req.params.id2) {
-        return { completedAt: req.body.completedAt, ...task };
-      } else return task;
-    });
-    user.tasks = newTaskArray;
+    let newTaskArray = await user.findByIdAndUpdate(req.params.id, req.body);
     await user.save();
     return res.status(200).json({ message: "Task Completed!" });
   } catch (err) {
@@ -51,12 +46,9 @@ exports.setComplete = async function (req, res, next) {
 exports.addNotes = async function (req, res, next) {
   try {
     let user = await db.User.findById(req.params.id);
-    let newTaskArray = user.tasks.map((task) => {
-      if (task.id === req.params.id2) {
-        return { notes: [req.body.note, ...task.notes], ...task };
-      } else return task;
-    });
-    user.tasks = newTaskArray;
+    let taskArray = await user.findById(req.params.id2);
+    taskArray.notes.push(req.body.note);
+    await taskArray.save();
     await user.save();
     return res.status(200).json({ message: "Notes Added!" });
   } catch (err) {
