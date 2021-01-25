@@ -18,6 +18,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/auth", userAuth);
 app.use("/api/tasks/", tasks);
 
+app.get('/*', function (req, res, next) {
+  try {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.use((req, res, next) => {
   let err = new Error("Not Found");
   err.status = 404;
